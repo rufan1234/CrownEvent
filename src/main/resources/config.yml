@@ -1,0 +1,109 @@
+# ============================================================
+#  CrownEvent - config.yml
+#  Mesajlar MiniMessage formatindadir: https://docs.advntr.dev/minimessage/format.html
+# ============================================================
+
+schedule:
+  day: SUNDAY              # MONDAY ... SUNDAY
+  time: "18:00"            # 24 saat formati (HH:mm)
+  timezone: system         # "system" veya ornek: "Europe/Istanbul"
+  grace-minutes: 30        # Sunucu 18:00'de kapaliysa, bu sure icinde acilirsa etkinlik yine baslar
+
+event:
+  world: world             # Sandigin spawn olacagi dunya (NORMAL/overworld olmali)
+  duration-minutes: 120    # Etkinlik penceresi (herkese uygulanan kisitlamalar bu sure boyunca surer)
+  min-radius: 800          # Dunya merkezinden minimum uzaklik
+  max-radius: 3000         # Dunya merkezinden maksimum uzaklik (world border ile otomatik sinirlanir)
+  border-margin: 100       # World border kenarindan uzak dur
+  min-distance-from-towns: 600
+  max-attempts: 40         # Guvenli yer bulmak icin deneme sayisi (chunk'lar async yuklenir)
+
+crown:
+  lifespan-days: 6         # Tac olusturulduktan tam 6 gun sonra her yerden silinir
+  expiry-check-seconds: 30 # Yuklu chunk/oyuncu taramasi araligi (ek olarak tam bitis aninda da tarama yapilir)
+  name: "<!italic><gold><bold>Kral Tacı"
+  lore:
+    - "<!italic><gray>Krallığın kadim tacı."
+    - "<!italic><yellow>Haste II, Speed I, Strength I, Regeneration I"
+    - "<!italic><red>Taşıyan avlanır — tüm eşyalar ölünce düşer!"
+    - "<!italic><dark_gray>Sona erer: <expires>"
+  particles:
+    view-distance: 48      # Taci kac blok mesafeden gorebilsin
+    show-to-wearer: false  # false = tac kendi ekranini kapatmaz, sadece digerleri gorur
+
+restrictions:
+  block-all-players-during-event: true   # true: etkinlik penceresi boyunca HERKES icin tp/elytra yasak
+                                         # false: sadece Tac'i tasiyan (teslim etmemis) oyuncu icin
+  full-loot-during-event: true           # Etkinlik suresince tum oyuncular olunce her seyi dusurur (keepInventory yok sayilir)
+  blocked-commands:
+    - tp
+    - tpa
+    - tpahere
+    - tpaccept
+    - tpdeny
+    - tpo
+    - tphere
+    - tpall
+    - home
+    - homes
+    - spawn
+    - warp
+    - warps
+    - back
+    - rtp
+    - wild
+    - town
+    - t
+    - tn
+  # Town travel-block (TownStones) gibi eklentiler genelde PLUGIN nedeniyle isinlar.
+  blocked-teleport-causes:
+    - COMMAND
+    - PLUGIN
+    - SPECTATE
+  # Etkinlik/tasima sirasinda world PvP otomatik acilir (event ve town dunyalarinda)
+  force-pvp: true
+
+delivery:
+  check-vertical: false    # true ise Y koordinati da yaricapa dahil edilir (kure), false ise sadece X/Z
+
+# Townlar - elle duzenleyebilir veya /crownevent addtown <isim> <yaricap> ile ekleyebilirsin
+towns:
+  town1:
+    name: "Town 1"
+    world: world
+    x: 0.0
+    y: 64.0
+    z: 0.0
+    radius: 60.0
+  town2:
+    name: "Town 2"
+    world: world
+    x: 1500.0
+    y: 64.0
+    z: 1500.0
+    radius: 60.0
+
+messages:
+  prefix: "<gold><bold>[Crown]</bold> <yellow>"
+  # Etkinlik baslangicinda duyurulan ozel mesaj:
+  custom-event-message: "[CUSTOM_EVENT_CHAT_MESSAGE_HERE]"
+  event-start:
+    - ""
+    - "<gold><bold>👑 THE CROWN EVENT HAS BEGUN! 👑"
+    - "<yellow><custom_message>"
+    - "<gray>Chest location: <white>X: <x>  Y: <y>  Z: <z> <gray>(<world>)"
+    - "<red>Teleports and Elytra are disabled until the Crown is delivered to a town!"
+    - ""
+  crown-taken-from-chest: "<player> took the Crown from the chest! They must now survive and bring it back to their town!"
+  crown-picked-up: "<player> picked up the Crown! They must bring it to a town!"
+  crown-dropped-killed: "<player> was killed by <killer> and dropped the Crown at X: <x> Y: <y> Z: <z>!"
+  crown-dropped-died: "<player> died and dropped the Crown at X: <x> Y: <y> Z: <z>!"
+  crown-dropped-logout: "<player> logged out with the Crown! It was dropped at X: <x> Y: <y> Z: <z> (<world>)!"
+  crown-delivered: "<player> safely delivered the Crown to <town>!"
+  event-window-ended: "The Crown Event window has ended. Teleports are enabled again, but the Crown carrier is still hunted until delivery."
+  event-stopped: "The Crown Event has been stopped by an administrator."
+  crown-expired: "A Crown has crumbled to dust..."
+  blocked-teleport: "<red>Teleporting is disabled during the Crown Event!"
+  blocked-elytra: "<red>Elytra is disabled during the Crown Event!"
+  blocked-ender-chest: "<red>The Crown cannot be stored in an Ender Chest!"
+  chest-protected: "<red>You cannot break the Crown chest while the Crown is still inside!"

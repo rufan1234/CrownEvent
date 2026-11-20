@@ -1,0 +1,17 @@
+name: CrownEvent
+version: '${version}'
+main: com.smp.crown.CrownPlugin
+api-version: '26.2'
+description: Weekly Sunday Crown Event (Kral Taci) for grounded survival SMP
+commands:
+  crownevent:
+    description: Crown Event admin command
+    usage: /<command> <start|stop|status|givecrown|addtown|reload>
+    permission: crownevent.admin
+permissions:
+  crownevent.admin:
+    description: Use /crownevent admin commands
+    default: op
+  crownevent.bypass:
+    description: Ignore teleport / elytra restrictions (not given to anyone by default)
+    default: false
